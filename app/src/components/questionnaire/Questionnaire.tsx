@@ -19,8 +19,8 @@ const Questionnaire = () => {
                         <span className="text-center w-8">5</span>
                         </div>
                     </div>
-                    <Question question='Feeling sad or down in the dumps' />
-                    <Question question='Feeling unhappy or blue' />
+                    <Question question='Feeling sad or down in the dumps' index={1} />
+                    <Question question='Feeling unhappy or blue' index={2} />
                 </div>
 
                 <div className="text-content text-xl leading-7 font-extralight">
