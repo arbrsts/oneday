@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply 2xl:text-[20px];
+}
+
+body {
+  @apply font-sans;
+}
+
+h1, h2 {
+  @apply font-serif;
+}
