@@ -1,6 +1,18 @@
-import Question from './Question'
+import Question from './Question';
+import questions from '@/data/questions';
+//import { useState } from 'react'
 
 const Questionnaire = () => {
+    //const [count, setCount] = useState<number>(0);
+
+    //const increment = () => {
+        //setCount(count + 1);
+    //};
+
+    const count = 0;
+
+    const questionsAtATime = 5;
+
     return (
         <>
             <h1 className="text-4xl mb-2">How are you feeling right now?</h1>
@@ -19,11 +31,9 @@ const Questionnaire = () => {
                         <span className="text-center w-8">5</span>
                         </div>
                     </div>
-                    <Question question='Feeling sad or down in the dumps' index={1} />
-                    <Question question='Feeling unhappy or blue' index={2} />
-                    <Question question='Feeling unhappy or blue' index={3} />
-                    <Question question='Feeling unhappy or blue' index={4} />
-                    <Question question='Feeling unhappy or blue' index={5} />
+                    {questions.slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime).map((q, i) => (
+                        <Question question={q} index={i+1} />
+                    ))}
                 </div>
 
                 <div className="text-content text-xl leading-7 font-extralight">
