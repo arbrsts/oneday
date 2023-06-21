@@ -1,17 +1,41 @@
+'use client'
+
 import Question from './Question';
 import questions from '@/data/questions';
-//import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Questionnaire = () => {
-    //const [count, setCount] = useState<number>(0);
-
-    //const increment = () => {
-        //setCount(count + 1);
-    //};
-
-    const count = 0;
-
     const questionsAtATime = 5;
+
+    const [count, setCount] = useState<number>(0);
+    const [scores, setScores] = useState<number[]>([0,0,0,0,0]);
+    const [total, setTotal] = useState<number>(0);
+    const [show, setShow] = useState<boolean>(false);
+
+    const increment = () => {
+        const subTotal = scores.reduce((acc, current) => acc + current, 0);
+
+        setTotal(total + subTotal);
+        setScores([0,0,0,0,0]);
+
+        if (count < 4) {
+            setCount(count + 1);
+        } else {
+            setShow(true);
+        }
+    };
+
+    const updateScores = (index: number, score: number) => {
+        const updatedScores = [...scores];
+        updatedScores[index] = score;
+        setScores(updatedScores);
+    }
+
+    useEffect(() => {
+        if (scores.every((val) => val > 0)) {
+            increment();
+        }
+    },[scores])
 
     return (
         <>
@@ -21,7 +45,7 @@ const Questionnaire = () => {
                 <div className="flex flex-col gap-4 col-span-2">
                     <div className="grid grid-cols-3">
                         <span className="col-span-2 text-2xl font-thin">
-                        Burn's Depression Index
+                        Burn's Depression Index {show ? total : scores}
                         </span>
                         <div className="flex gap-2 mt-auto mb-1">
                         <span className="text-center w-8">1</span>
@@ -32,7 +56,7 @@ const Questionnaire = () => {
                         </div>
                     </div>
                     {questions.slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime).map((q, i) => (
-                        <Question question={q} index={i+1} />
+                        <Question question={q} index={i} update={updateScores} key={q}/>
                     ))}
                 </div>
 
