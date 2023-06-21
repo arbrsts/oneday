@@ -3,6 +3,7 @@
 import Question from './Question';
 import questions from '@/data/questions';
 import { useState, useEffect } from 'react'
+import { TransitionGroup, CSSTransition, SwitchTransition } from 'react-transition-group';
 
 const Questionnaire = () => {
     const questionsAtATime = 5;
@@ -42,27 +43,42 @@ const Questionnaire = () => {
             <h1 className="text-4xl mb-2">How are you feeling right now?</h1>
             <hr />
             <div className="grid lg:grid-cols-3 gap-12 mt-6">
-                {show ? 
-                <div className="flex items-center justify-center col-span-2">
-                    <h1>Your Burn's depression index score is: {total}</h1>
-                </div> :
-                <div className="flex flex-col gap-4 col-span-2">
-                    <div className="grid grid-cols-3">
-                        <span className="col-span-2 text-2xl font-thin">
-                        Burn's Depression Index
-                        </span>
-                        <div className="flex gap-2 mt-auto mb-1">
-                        <span className="text-center w-8">1</span>
-                        <span className="text-center w-8">2</span>
-                        <span className="text-center w-8">3</span>
-                        <span className="text-center w-8">4</span>
-                        <span className="text-center w-8">5</span>
+                <SwitchTransition mode='out-in'>
+                    {show ? 
+                    <CSSTransition key='result' classNames="fade" timeout={400}>
+                        <div className="flex items-center justify-center col-span-2">
+                            <h1>Your Burn's depression index score is: {total}</h1>
                         </div>
-                    </div>
-                    {questions.slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime).map((q, i) => (
-                        <Question question={q} index={i} update={updateScores} key={q}/>
-                    ))}
-                </div>}
+                    </CSSTransition> :
+                    <CSSTransition key='questionnaire' classNames="fade" timeout={400}>
+                        <div className="flex flex-col gap-4 col-span-2">
+                            <div className="grid grid-cols-3">
+                                <span className="col-span-2 text-2xl font-thin">
+                                Burn's Depression Index
+                                </span>
+                                <div className="flex gap-2 mt-auto mb-1">
+                                <span className="text-center w-8">1</span>
+                                <span className="text-center w-8">2</span>
+                                <span className="text-center w-8">3</span>
+                                <span className="text-center w-8">4</span>
+                                <span className="text-center w-8">5</span>
+                                </div>
+                            </div>
+                            <SwitchTransition mode='out-in'>
+                                <CSSTransition key={count} classNames="fade" timeout={400}>
+                                    <div className='flex flex-col gap-4'>
+                                        {questions
+                                            .slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime)
+                                            .map((q, i) => (
+                                                <Question question={q} index={i} update={updateScores} key={q}/>
+                                            ))}
+                                    </div>
+                                </CSSTransition>
+                            </SwitchTransition>
+                        </div>
+                    </CSSTransition>
+                    }
+                </SwitchTransition>
 
                 <div className="text-content text-xl leading-7 font-extralight">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
