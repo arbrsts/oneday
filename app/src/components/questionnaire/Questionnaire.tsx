@@ -7,10 +7,10 @@ import { useState, useEffect } from 'react'
 const Questionnaire = () => {
     const questionsAtATime = 5;
 
-    const [count, setCount] = useState<number>(0);
-    const [scores, setScores] = useState<number[]>([0,0,0,0,0]);
-    const [total, setTotal] = useState<number>(0);
-    const [show, setShow] = useState<boolean>(false);
+    const [count, setCount] = useState<number>(0); // Keeps track of the current set of questions being displayed (sets of 5)
+    const [scores, setScores] = useState<number[]>([0,0,0,0,0]); // Keeps track of the answers to the current questions being displayed
+    const [total, setTotal] = useState<number>(0); // Keeps track of the total score from questions answered
+    const [show, setShow] = useState<boolean>(false); // Indicates whether the questionnaire has been completed
 
     const increment = () => {
         const subTotal = scores.reduce((acc, current) => acc + current, 0);
@@ -44,7 +44,7 @@ const Questionnaire = () => {
             <div className="grid lg:grid-cols-3 gap-12 mt-6">
                 {show ? 
                 <div className="flex items-center justify-center col-span-2">
-                    <h1>your Burn's depression index score is: {total}</h1>
+                    <h1>Your Burn's depression index score is: {total}</h1>
                 </div> :
                 <div className="flex flex-col gap-4 col-span-2">
                     <div className="grid grid-cols-3">
