@@ -42,10 +42,14 @@ const Questionnaire = () => {
             <h1 className="text-4xl mb-2">How are you feeling right now?</h1>
             <hr />
             <div className="grid lg:grid-cols-3 gap-12 mt-6">
+                {show ? 
+                <div className="flex items-center justify-center col-span-2">
+                    <h1>your Burn's depression index score is: {total}</h1>
+                </div> :
                 <div className="flex flex-col gap-4 col-span-2">
                     <div className="grid grid-cols-3">
                         <span className="col-span-2 text-2xl font-thin">
-                        Burn's Depression Index {show ? total : scores}
+                        Burn's Depression Index
                         </span>
                         <div className="flex gap-2 mt-auto mb-1">
                         <span className="text-center w-8">1</span>
@@ -58,7 +62,7 @@ const Questionnaire = () => {
                     {questions.slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime).map((q, i) => (
                         <Question question={q} index={i} update={updateScores} key={q}/>
                     ))}
-                </div>
+                </div>}
 
                 <div className="text-content text-xl leading-7 font-extralight">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
