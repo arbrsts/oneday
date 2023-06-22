@@ -1,12 +1,13 @@
 'use client'
 
 import Question from './Question';
-import questions from '@/data/questions';
+import { questions, questionsAtATime } from '@/data/questions';
 import { useState, useEffect } from 'react'
-import { TransitionGroup, CSSTransition, SwitchTransition } from 'react-transition-group';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+
+export type UpdateScoresType = (index: number, score: number) => void;
 
 const Questionnaire = () => {
-    const questionsAtATime = 5;
 
     const [count, setCount] = useState<number>(0); // Keeps track of the current set of questions being displayed (sets of 5)
     const [scores, setScores] = useState<number[]>([0,0,0,0,0]); // Keeps track of the answers to the current questions being displayed
@@ -26,7 +27,7 @@ const Questionnaire = () => {
         }
     };
 
-    const updateScores = (index: number, score: number) => {
+    const updateScores:  UpdateScoresType = (index, score) => {
         const updatedScores = [...scores];
         updatedScores[index] = score;
         setScores(updatedScores);
@@ -70,7 +71,7 @@ const Questionnaire = () => {
                                         {questions
                                             .slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime)
                                             .map((q, i) => (
-                                                <Question question={q} index={i} update={updateScores} key={q}/>
+                                                <Question question={q} index={i} set={count} update={updateScores} key={q}/>
                                             ))}
                                     </div>
                                 </CSSTransition>

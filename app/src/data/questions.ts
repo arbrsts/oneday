@@ -1,4 +1,4 @@
-const questions: string[] = [
+export const questions: string[] = [
     "Feeling sad or down in the dumps",
     "Feeling unhappy or blue",
     "Crying spells or tearfulness",
@@ -26,4 +26,4 @@ const questions: string[] = [
     "Do you have a plan for harming yourself?"
 ];
 
-export default questions;
+export const questionsAtATime = 5;

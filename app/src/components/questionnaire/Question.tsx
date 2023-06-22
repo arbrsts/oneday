@@ -1,5 +1,14 @@
-const Question = (props: { question: string; index: number; update: (index: number, score: number) => void; }) => {
-    const { question, index, update } = props;
+import { questionsAtATime } from '@/data/questions';
+import { UpdateScoresType } from './Questionnaire';
+interface QuestionProps {
+    question: string;
+    index: number;
+    set: number;
+    update: UpdateScoresType;
+}
+
+const Question = (props: QuestionProps) => {
+    const { question, index, set, update } = props;
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -9,7 +18,7 @@ const Question = (props: { question: string; index: number; update: (index: numb
     return (
         <div className="grid grid-cols-3 gap-2">
             <span className="font-thin col-span-2 text-xl text-content">
-            {`${index+1}. ${question}`}
+            {`${(questionsAtATime*set)+index+1}. ${question}`}
             </span>
             <div className="flex gap-2">
                 <input
