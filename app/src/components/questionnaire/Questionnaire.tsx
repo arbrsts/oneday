@@ -2,7 +2,7 @@
 
 import Question from './Question';
 import { questions, questionsAtATime } from '@/data/questions';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 export type UpdateScoresType = (index: number, score: number) => void;
@@ -13,6 +13,10 @@ const Questionnaire = () => {
     const [scores, setScores] = useState<number[]>([0,0,0,0,0]); // Keeps track of the answers to the current questions being displayed
     const [total, setTotal] = useState<number>(0); // Keeps track of the total score from questions answered
     const [show, setShow] = useState<boolean>(false); // Indicates whether the questionnaire has been completed
+
+    const totalRef = useRef(null); // For transition element - avoids defaulting to ReactDOM.findNode
+    const questionnaireRef = useRef(null);
+    const questionRef = useRef(null);
 
     const increment = () => {
         const subTotal = scores.reduce((acc, current) => acc + current, 0);
@@ -46,13 +50,13 @@ const Questionnaire = () => {
             <div className="grid lg:grid-cols-3 gap-12 mt-6">
                 <SwitchTransition mode='out-in'>
                     {show ? 
-                    <CSSTransition key='result' classNames="fade" timeout={400}>
-                        <div className="flex items-center justify-center col-span-2">
+                    <CSSTransition key='result' nodeRef={totalRef} classNames="fade" timeout={400}>
+                        <div ref={totalRef} className="flex items-center justify-center col-span-2">
                             <h1>Your Burn's depression index score is: {total}</h1>
                         </div>
                     </CSSTransition> :
-                    <CSSTransition key='questionnaire' classNames="fade" timeout={400}>
-                        <div className="flex flex-col gap-4 col-span-2">
+                    <CSSTransition key='questionnaire' nodeRef={questionnaireRef} classNames="fade" timeout={400}>
+                        <div ref={questionnaireRef} className="flex flex-col gap-4 col-span-2">
                             <div className="grid grid-cols-3">
                                 <span className="col-span-2 text-2xl font-thin">
                                 Burn's Depression Index
@@ -66,8 +70,8 @@ const Questionnaire = () => {
                                 </div>
                             </div>
                             <SwitchTransition mode='out-in'>
-                                <CSSTransition key={count} classNames="fade" timeout={400}>
-                                    <div className='flex flex-col gap-4'>
+                                <CSSTransition key={count} nodeRef={questionRef} classNames="fade" timeout={400}>
+                                    <div ref={questionRef} className='flex flex-col gap-4'>
                                         {questions
                                             .slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime)
                                             .map((q, i) => (
