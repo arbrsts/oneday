@@ -13,3 +13,19 @@ body {
 h1, h2 {
   @apply font-serif;
 }
+
+.fade-enter {
+  @apply opacity-0;
+} 
+
+.fade-enter-active {
+  @apply transition-opacity opacity-100 ease-in duration-[400ms];
+}
+
+.fade-exit {
+  @apply opacity-100;
+}
+
+.fade-exit-active {
+  @apply transition-opacity opacity-0 ease-out duration-[400ms];
+}
