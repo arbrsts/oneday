@@ -7,6 +7,13 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 export type UpdateScoresType = (index: number, score: number) => void;
 
+const fade = {
+    enter: 'opacity-0',
+    enterActive: 'transition-opacity opacity-1 ease-in duration-400',
+    exit: 'opacity-1',
+    exitActive: 'transition-opacity opacity-0 ease-out duration-400',
+}
+
 const Questionnaire = () => {
 
     const [count, setCount] = useState<number>(0); // Keeps track of the current set of questions being displayed (sets of 5)
@@ -50,12 +57,12 @@ const Questionnaire = () => {
             <div className="grid lg:grid-cols-3 gap-12 mt-6">
                 <SwitchTransition mode='out-in'>
                     {show ? 
-                    <CSSTransition key='result' nodeRef={totalRef} classNames="fade" timeout={400}>
+                    <CSSTransition key='result' nodeRef={totalRef} classNames={fade} timeout={400}>
                         <div ref={totalRef} className="flex items-center justify-center col-span-2">
                             <h1>Your Burn's depression index score is: {total}</h1>
                         </div>
                     </CSSTransition> :
-                    <CSSTransition key='questionnaire' nodeRef={questionnaireRef} classNames="fade" timeout={400}>
+                    <CSSTransition key='questionnaire' nodeRef={questionnaireRef} classNames={fade} timeout={400}>
                         <div ref={questionnaireRef} className="flex flex-col gap-4 col-span-2">
                             <div className="grid grid-cols-3">
                                 <span className="col-span-2 text-2xl font-thin">
@@ -70,7 +77,7 @@ const Questionnaire = () => {
                                 </div>
                             </div>
                             <SwitchTransition mode='out-in'>
-                                <CSSTransition key={count} nodeRef={questionRef} classNames="fade" timeout={400}>
+                                <CSSTransition key={count} nodeRef={questionRef} classNames={fade} timeout={400}>
                                     <div ref={questionRef} className='flex flex-col gap-4'>
                                         {questions
                                             .slice(count*questionsAtATime, count*questionsAtATime+questionsAtATime)
