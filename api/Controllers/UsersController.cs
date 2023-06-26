@@ -1,7 +1,12 @@
 using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace api.Controllers;
 
@@ -11,6 +16,7 @@ public class UsersController : ControllerBase
 {
 
     private IMongoCollection<User> usersCollection;
+    private readonly IConfiguration _config;
 
     private bool checkPassword(string password, string savedPasswordHash)
     {
@@ -31,9 +37,10 @@ public class UsersController : ControllerBase
         return true;
     }
 
-    public UsersController(MongoDbService mongoDbService)
+    public UsersController(IConfiguration config, MongoDbService mongoDbService)
     {
         usersCollection = mongoDbService.db.GetCollection<User>("users");
+        _config = config;
     }
 
     [HttpGet("{id}")]
@@ -43,7 +50,7 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost]
+    [HttpPost("signup")]
     public async Task<IActionResult> CreateUser(UserCreateRequest userRequest)
     {
         var salt = new byte[16];
@@ -60,7 +67,7 @@ public class UsersController : ControllerBase
         var user = new User
         {
             Username = userRequest.Username,
-            Password = userRequest.Password
+            Password = savedPasswordHash
         };
 
         await usersCollection.InsertOneAsync(user);
@@ -68,9 +75,32 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
-    [HttpPost()]
-    public IActionResult LoginUser()
+    [AllowAnonymous]
+    [HttpPost("login")]
+    public async Task<IActionResult> LoginUser(UserLoginRequest loginRequest)
     {
+        var user = await usersCollection.Find(x => x.Username == loginRequest.Username).FirstOrDefaultAsync();
 
+        if (user == null)
+        {
+            return Unauthorized();
+        }
+
+        if (checkPassword(loginRequest.Password, user.Password))
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+              claims: new[] {
+                new Claim("id", user.Id)
+              },
+              // expires: DateTime.Now.AddMinutes(30),
+              signingCredentials: creds);
+
+            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+        }
+
+        throw new Exception();
     }
 }

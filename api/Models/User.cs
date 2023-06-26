@@ -5,16 +5,10 @@ public class User
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    public string Id { get; set; } = default!;
 
-    public string? Username { get; set; }
+    public string Username { get; set; } = default!;
 
-    public string? Password { get; set; }
+    public string Password { get; set; } = default!;
 }
 
-public class UserCreateRequest
-{
-    public string Username { get; set; }
-
-    public string Password { get; set; }
-}
