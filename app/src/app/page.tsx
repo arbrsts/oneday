@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="lg:px-12">
       <Navbar />
-      <main className="">
+      <main className="mb-16">
         <section className="grid lg:grid-cols-7 gap-14">
           <div className="flex flex-col lg:col-span-3 bg-[#384B42] p-12 rounded-2xl">
             <h1 className="text-4xl lg:text-6xl leading-normal tracking-wide font-bold text-white mb-6">
@@ -101,10 +101,12 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer>
-        <div>
-          Privacy & Legal
+      <footer className="flex justify-between">
+        <div className="flex flex-col gap-2 font-medium capitalize tracking-wider">
+          <div className="  ">PRIVACY & LEGAL</div>
+          <div className="">CONTACT</div>
         </div>
+        <div>© 2023 - One Day, All rights reserved.</div>
       </footer>
     </div>
   );
