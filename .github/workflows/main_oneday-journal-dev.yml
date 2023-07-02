@@ -27,6 +27,7 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
+          rm -rf node_modules
 
       - name: Zip artifact for deployment
         run: zip release.zip ./app/* -r
