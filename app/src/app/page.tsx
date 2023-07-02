@@ -1,5 +1,5 @@
-import Navbar from '../components/navigation/Navbar'
-import Questionnaire from '../components/questionnaire/Questionnaire'
+import Navbar from "../components/navigation/Navbar";
+import Questionnaire from "../components/questionnaire/Questionnaire";
 
 export default function Home() {
   return (
