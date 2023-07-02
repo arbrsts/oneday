@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from 'react';
+'use client'
+
 
 const TextInput = () => {
     return (
         <div
             contentEditable
-            className="break-all border border-gray-300 p-2 rounded"
+            className="outline-none focus:ring-1 break-all border  p-2 rounded font-sans"
         >
         </div>
     );
