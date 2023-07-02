@@ -1,11 +1,12 @@
+import { Dropdown, TextInput } from "@/components/input";
 import Navbar from "../components/navigation/Navbar";
 import Questionnaire from "../components/questionnaire/Questionnaire";
 
 export default function Home() {
   return (
-    <div>
+    <div className="lg:px-12">
       <Navbar />
-      <main className="">
+      <main className="mb-16">
         <section className="grid lg:grid-cols-7 gap-14">
           <div className="flex flex-col lg:col-span-3 bg-[#384B42] p-12 rounded-2xl">
             <h1 className="text-4xl lg:text-6xl leading-normal tracking-wide font-bold text-white mb-6">
@@ -52,10 +53,61 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mt-24">
+        <section className="my-24">
           <Questionnaire />
         </section>
+
+        <section>
+          <div className="flex gap-4 mb-4">
+            <div className="inline-block bg-[#454545] text-white px-4 py-2 rounded-full">
+              Mindfulness Journal
+            </div>
+            <div className="inline-block border px-4 py-2 rounded-full">
+              Mindfulness Journal
+            </div>
+          </div>
+
+          <div className="rounded-2xl lg:p-20 grid lg:grid-cols-8 gap-12 bg-[#F8F9F8]">
+            <div className="lg:col-span-3">
+              <h2 className="text-4xl mb-2">Mindfulness Journal for you</h2>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </div>
+            </div>
+            <div className="gap-1 lg:col-span-5">
+              <div className="grid grid-cols-3 mb-2 gap-4">
+                <span>Thought</span> <span>Type of thinking</span>
+                <span>Better thought</span>
+              </div>
+              <hr className="mb-2" />
+              <div className="flex flex-col gap-2">
+                <div className="relative grid lg:grid-cols-3 gap-4 items-top">
+                  <div className="absolute self-center -left-5">-</div>
+                  <TextInput />
+                  <Dropdown />
+                  <TextInput />
+                </div>
+                <div className="relative grid lg:grid-cols-3 gap-4 items-top">
+                  <div className="absolute self-center -left-5">+</div>
+                  <TextInput />
+                  <Dropdown />
+                  <TextInput />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+      <footer className="flex justify-between">
+        <div className="flex flex-col gap-2 font-medium capitalize tracking-wider">
+          <div className="  ">PRIVACY & LEGAL</div>
+          <div className="">CONTACT</div>
+        </div>
+        <div>© 2023 - One Day, All rights reserved.</div>
+      </footer>
     </div>
   );
 }
