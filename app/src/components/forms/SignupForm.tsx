@@ -46,7 +46,7 @@ const SignupForm = () => {
 	                    <span>I accept the terms and privacy policy</span>
                     </label>
 
-                    <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded' >Sign up</button>
+                    <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded' >Create an account</button>
                 </Form>
             </Formik>
             <div>

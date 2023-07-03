@@ -18,24 +18,24 @@ const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) 
 const LoginForm = () => {
 
     return (
-        <div className='flex flex-col justify-center'>
-            <h1 className="text-center text-4xl lg:text-6xl leading-normal tracking-wide font-bold mb-6 text-gray-800">Login</h1>
+        <div className='flex flex-col justify-center flex-shrink-0 ' >
+            <h1 className="text-center text-gray-800 text-4xl font-serif font-bold leading-normal mb-5">Login</h1>
             <Formik
                 className='flex flex-col justify-center'
                 initialValues={{ username: '', password: '' }}
                 onSubmit={handleSubmit}
             >
                 <Form className='flex flex-col justify-center'>
-                    <label  htmlFor="username">Username</label>
-                    <Field type='text' id='username' name='username' />
+                    <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
+                    <Field type='text' id='username' name='username' className='rounded border border-gray-600 mb-5' />
 
-                    <label htmlFor="password">Password</label>
-                    <Field type='password' id='password' name='password' />
+                    <label htmlFor="password" className='text-gray-600 text-base font-sans font-normal leading-normal'>Password</label>
+                    <Field type='password' id='password' name='password' className='rounded border border-gray-600 mb-5' />
 
-                    <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded' >Login</button>
+                    <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
                 </Form>
             </Formik>
-            <div>
+            <div className='text-center'>
                 Don't have an account? <Link className='text-[#6CA390]' href='/signup'>Sign up here</Link>
             </div>
         </div>
