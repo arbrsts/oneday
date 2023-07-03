@@ -29,3 +29,8 @@ h1, h2 {
 .fade-exit-active {
   @apply transition-opacity opacity-0 ease-out duration-[400ms];
 }
+
+#login-form {
+  width: 350px;
+  height: 487px;
+}
