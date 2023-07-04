@@ -27,7 +27,7 @@ const LoginForm = () => {
             >
                 <Form className='flex flex-col justify-center'>
                     <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
-                    <Field type='text' id='username' name='username' className='rounded border border-gray-600 mb-5 w-[278.078px]' />
+                    <Field type='text' id='username' name='username' className='rounded border border-gray-600 mb-5' />
 
                     <label htmlFor="password" className='text-gray-600 text-base font-sans font-normal leading-normal'>Password</label>
                     <Field type='password' id='password' name='password' className='rounded border border-gray-600 mb-7' />
