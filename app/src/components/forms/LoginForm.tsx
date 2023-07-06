@@ -8,11 +8,32 @@ interface Values {
     password: string;
 }
 
+interface Errors {
+    username?: string;
+    password?: string;
+}
+
 const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
     setTimeout(() => {
         alert(JSON.stringify(values));
         setSubmitting(false);
     }, 400)
+}
+
+const validate = (values: Values) => {
+    const errors: Errors = {};
+
+    const required = 'Required';
+
+    if (!values.username) {
+        errors.username = required;
+    }
+
+    if (!values.password) {
+        errors.password = required;
+    }
+
+    return errors;
 }
 
 const LoginForm = () => {
@@ -23,17 +44,20 @@ const LoginForm = () => {
             <Formik
                 className='flex flex-col justify-center'
                 initialValues={{ username: '', password: '' }}
+                validate={validate}
                 onSubmit={handleSubmit}
-            >
-                <Form className='flex flex-col justify-center'>
+            >{({ errors, touched }) => 
+                (<Form className='flex flex-col justify-center'>
                     <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
-                    <Field type='text' id='username' name='username' className='rounded border border-gray-600 mb-5' />
+                    {errors.username && touched.username ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.username}</div> : null}
+                    <Field type='text' id='username' name='username' className={'rounded border mb-5 ' + (errors.username && touched.username ? 'border-red-500' : 'border-gray-600')} />
 
                     <label htmlFor="password" className='text-gray-600 text-base font-sans font-normal leading-normal'>Password</label>
-                    <Field type='password' id='password' name='password' className='rounded border border-gray-600 mb-7' />
+                    {errors.password && touched.password ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.password}</div> : null}
+                    <Field type='password' id='password' name='password' className={'rounded border mb-5 ' + (errors.password && touched.password ? 'border-red-500' : 'border-gray-600')} />
 
                     <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
-                </Form>
+                </Form>)}
             </Formik>
             <div className='flex text-center'>
                 <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal'>Don't have an account?</p> 

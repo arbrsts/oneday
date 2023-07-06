@@ -65,8 +65,7 @@ const SignupForm = () => {
                 validate={validate}
                 onSubmit={handleSubmit}
             >{({ errors, touched }) => 
-                (
-                <Form className='flex flex-col justify-center'>
+                (<Form className='flex flex-col justify-center'>
                     <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
                     {errors.username && touched.username ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.username}</div> : null}
                     <Field type='text' id='username' name='username' className={'rounded border mb-5 ' + (errors.username && touched.username ? 'border-red-500' : 'border-gray-600')} />
