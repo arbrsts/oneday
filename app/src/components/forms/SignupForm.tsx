@@ -9,11 +9,44 @@ interface Values {
     accept: boolean;
 }
 
+interface Errors {
+    username?: string;
+    password?: string;
+    passwordConfirm?: string;
+    accept?: string;
+}
+
 const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
     setTimeout(() => {
         alert(JSON.stringify(values));
         setSubmitting(false);
     }, 400)
+}
+
+const validate = (values: Values) => {
+    const errors: Errors = {};
+
+    const required = 'Required';
+
+    if (!values.username) {
+        errors.username = required;
+    }
+
+    if (!values.password) {
+        errors.password = required;
+    }
+
+    if (!values.passwordConfirm) {
+        errors.passwordConfirm = required;
+    } else if (values.password != values.passwordConfirm) {
+        errors.passwordConfirm = 'Password does not match';  
+    }
+
+    if (!values.accept) {
+        errors.accept = required;
+    }
+
+    return errors;
 }
 
 const SignupForm = () => {
@@ -29,25 +62,31 @@ const SignupForm = () => {
                     passwordConfirm: '', 
                     accept: false 
                 }}
+                validate={validate}
                 onSubmit={handleSubmit}
-            >
+            >{({ errors, touched }) => 
+                (
                 <Form className='flex flex-col justify-center'>
                     <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
-                    <Field type='text' id='username' name='username' className='rounded border border-gray-600 mb-5' />
+                    {errors.username && touched.username ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.username}</div> : null}
+                    <Field type='text' id='username' name='username' className={'rounded border mb-5 ' + (errors.username && touched.username ? 'border-red-500' : 'border-gray-600')} />
 
                     <label htmlFor="password" className='text-gray-600 text-base font-sans font-normal leading-normal'>Password</label>
-                    <Field type='password' id='password' name='password' className='rounded border border-gray-600 mb-5' />
+                    {errors.password && touched.password ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.password}</div> : null}
+                    <Field type='password' id='password' name='password' className={'rounded border mb-5 ' + (errors.password && touched.password ? 'border-red-500' : 'border-gray-600')} />
 
-                    <label htmlFor="passwordConfirm" className='text-gray-600 text-base font-sans font-normal leading-normal'>Confirm password</label>
-                    <Field type='password' id='passwordConfirm' name='passwordConfirm' className='rounded border border-gray-600 mb-5' />
+                    <label htmlFor="passwordConfirm" className='text-base font-sans font-normal leading-normal text-gray-600'>Confirm password</label>
+                    {errors.passwordConfirm && touched.passwordConfirm ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.passwordConfirm}</div> : null}
+                    <Field type='password' id='passwordConfirm' name='passwordConfirm' className={'rounded border mb-5 ' + (errors.passwordConfirm && touched.passwordConfirm ? 'border-red-500' : 'border-gray-600')} />
 
-                    <label className="flex items-center text-gray-600 text-base font-sans font-normal leading-normal mb-7">
+                    {errors.accept && touched.accept ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.accept}</div> : null}
+                    <label className="flex items-center text-gray-600 text-base font-sans font-normal leading-normal mb-7 ">
                         <Field type='checkbox' name='accept' className="mr-2" />
 	                    <span>I accept the terms and privacy policy</span>
                     </label>
 
-                    <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Create an account</button>
-                </Form>
+                    <button type='submit' className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Create an account</button>
+                </Form>)}
             </Formik>
             <div className='flex items-center'>
                 <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal'>Already have an account?</p> 
