@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
+import { postLogin } from '@/api/api';
 
 interface Values {
     username: string;
@@ -14,13 +15,15 @@ interface Errors {
 }
 
 const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-    setTimeout(() => {
-        alert(JSON.stringify(values));
-        setSubmitting(false);
-    }, 400)
+    postLogin(values).then(
+        res => {
+            alert(JSON.stringify(res));
+            setSubmitting(false);
+        }
+    );
 }
 
-const validate = (values: Values) => {
+const validate = (values: Values): Errors => {
     const errors: Errors = {};
 
     const required = 'Required';
