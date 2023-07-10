@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { postLogin } from '@/api/api';
+import { postLogin } from '@/api/auth/login';
 
 interface Values {
     username: string;
@@ -59,10 +59,10 @@ const LoginForm = () => {
                     {errors.password && touched.password ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.password}</div> : null}
                     <Field type='password' id='password' name='password' className={'rounded border mb-5 ' + (errors.password && touched.password ? 'border-red-500' : 'border-gray-600')} />
 
-                    <button className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
+                    <button type='submit' className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
                 </Form>)}
             </Formik>
-            <div className='flex text-center'>
+            <div className='flex justify-center'>
                 <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal'>Don't have an account?</p> 
                 <Link className='text-[#6CA390]' href='/signup'>Sign up here</Link>
             </div>

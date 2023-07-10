@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { postSignup } from '@/api/api';
+import { postSignup } from '@/api/auth/signup';
 interface Values {
     username: string;
     password: string;
@@ -92,7 +92,7 @@ const SignupForm = () => {
                     <button type='submit' className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Create an account</button>
                 </Form>)}
             </Formik>
-            <div className='flex items-center'>
+            <div className='flex justify-center'>
                 <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal'>Already have an account?</p> 
                 <Link className='text-[#6CA390]' href='/login'>Login here</Link>
             </div>

@@ -1,4 +1,4 @@
-interface RequestBody {
+export interface RequestBody {
     username : string;
     password : string;
 }
@@ -6,15 +6,20 @@ interface RequestBody {
 const headers  = new Headers();
 headers.append('Content-type', 'application/json');
 
-const requestOptions: RequestInit = {
+export const requestOptions: RequestInit = {
     method: 'POST',
     headers: headers
 }
 
-const sendPostRequest = async (url: string, requestOptions: RequestInit): Promise<object> => {
+export const sendPostRequest = async (url: string, requestOptions: RequestInit): Promise<object> => {
     try {
 
         const response = await fetch(url, requestOptions);
+
+        if (!response.ok) {
+            throw new Error('Invalid details');
+        }
+        
         const contentType = response.headers.get('Content-Type');
 
         let responseData = {};
@@ -31,27 +36,7 @@ const sendPostRequest = async (url: string, requestOptions: RequestInit): Promis
         return responseData;
 
     } catch (err) {
-        console.log('Error:', err)
-        return {error: err};
+        let message = err instanceof Error ? err.message : null;
+        return {error: (message ? message : 'Something went wrong')};
     }
-}
-
-export const postSignup = async (body: RequestBody): Promise<object> => {
-    const url = 'https://localhost:7095/Users/signup';
-
-    requestOptions.body = JSON.stringify(body);
-
-    const responseData = await sendPostRequest(url, requestOptions);
-
-    return responseData;
-}
-
-export const postLogin = async (body: RequestBody): Promise<object> => {
-    const url = 'https://localhost:7095/Users/login';
-
-    requestOptions.body = JSON.stringify(body);
-
-    const responseData = await sendPostRequest(url, requestOptions);
-
-    return responseData;
 }

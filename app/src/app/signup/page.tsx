@@ -6,7 +6,7 @@ export default function Signup() {
   return (
     <div className="lg:px-12 flex flex-col h-[95vh]">
       <Navbar />
-      <main className="mb-16 flex-1 flex items-center justify-center">
+      <main className="mb-5 flex-1 flex items-center justify-center">
         <SignupForm />
       </main>
       <footer className="flex justify-between">
