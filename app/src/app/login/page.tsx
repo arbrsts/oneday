@@ -4,7 +4,7 @@ import LoginForm from "@/components/forms/LoginForm";
 
 export default function Login() {
   return (
-    <div className="lg:px-12 flex flex-col h-[95vh]">
+    <div className="lg:px-12 flex flex-col">
       <Navbar />
       <main className="mb-10 flex-1 flex items-center justify-center">
         <LoginForm />

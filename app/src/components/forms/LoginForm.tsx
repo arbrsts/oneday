@@ -42,7 +42,7 @@ const validate = (values: Values): Errors => {
 const LoginForm = () => {
 
     return (
-        <div className='flex flex-col justify-center flex-shrink-0' >
+        <div className='flex flex-col justify-center' >
             <h1 className="text-center text-gray-800 text-4xl font-serif font-bold leading-normal mb-5">Login</h1>
             <Formik
                 className='flex flex-col justify-center'
@@ -59,7 +59,7 @@ const LoginForm = () => {
                     {errors.password && touched.password ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.password}</div> : null}
                     <Field type='password' id='password' name='password' className={'rounded border mb-5 ' + (errors.password && touched.password ? 'border-red-500' : 'border-gray-600')} />
 
-                    <button type='submit' className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
+                    <button type='submit' className='text-xl bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
                 </Form>)}
             </Formik>
             <div className='flex justify-center'>

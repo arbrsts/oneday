@@ -57,7 +57,7 @@ const validate = (values: Values) => {
 const SignupForm = () => {
 
     return (
-        <div className='flex flex-col justify-center flex-shrink-0'>
+        <div className='flex flex-col justify-center'>
             <h1 className="text-center text-gray-800 text-4xl font-serif font-bold leading-normal mb-5">Sign Up</h1>
             <Formik
                 className='flex flex-col justify-center'
@@ -89,7 +89,7 @@ const SignupForm = () => {
 	                    <span>I accept the terms and privacy policy</span>
                     </label>
 
-                    <button type='submit' className='text-xl w-350px h-63px bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Create an account</button>
+                    <button type='submit' className='text-xl bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Create an account</button>
                 </Form>)}
             </Formik>
             <div className='flex justify-center'>

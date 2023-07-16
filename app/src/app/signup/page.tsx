@@ -4,7 +4,7 @@ import SignupForm from "@/components/forms/SignupForm";
 
 export default function Signup() {
   return (
-    <div className="lg:px-12 flex flex-col h-[95vh]">
+    <div className="lg:px-12 flex flex-col">
       <Navbar />
       <main className="mb-5 flex-1 flex items-center justify-center">
         <SignupForm />
