@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { postSignup } from '@/api/auth/signup';
+import Auth from '@/util/Auth';
 interface Values {
     username: string;
     password: string;
@@ -19,8 +19,8 @@ interface Errors {
 
 const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
     const body = {username: values.username, password: values.password};
-    
-    postSignup(body).then(
+
+    Auth.signup(body).then(
         res => {
             alert(JSON.stringify(res));
             setSubmitting(false);

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { postLogin } from '@/api/auth/login';
+import Auth from '@/util/Auth';
 
 interface Values {
     username: string;
@@ -15,12 +15,14 @@ interface Errors {
 }
 
 const handleSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-    postLogin(values).then(
+
+    Auth.login(values).then(
         res => {
             alert(JSON.stringify(res));
             setSubmitting(false);
         }
     );
+
 }
 
 const validate = (values: Values): Errors => {

@@ -1,17 +1,4 @@
-export interface RequestBody {
-    username : string;
-    password : string;
-}
-
-const headers  = new Headers();
-headers.append('Content-type', 'application/json');
-
-export const requestOptions: RequestInit = {
-    method: 'POST',
-    headers: headers
-}
-
-export const sendPostRequest = async (url: string, requestOptions: RequestInit): Promise<object> => {
+const fetchRequest = async (url: string, requestOptions: RequestInit): Promise<object> => {
     try {
 
         const response = await fetch(url, requestOptions);
@@ -28,7 +15,7 @@ export const sendPostRequest = async (url: string, requestOptions: RequestInit):
             responseData = await response.json();
         } else if (contentType && contentType.includes('text/plain')) {
             const textData = await response.text();
-            responseData = {token: textData};
+            responseData = {text: textData};
         } else {
             throw new Error('Invalid content type');
         }
@@ -40,3 +27,5 @@ export const sendPostRequest = async (url: string, requestOptions: RequestInit):
         return {error: (message ? message : 'Something went wrong')};
     }
 }
+
+export default fetchRequest;
