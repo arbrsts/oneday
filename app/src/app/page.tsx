@@ -1,11 +1,9 @@
 import { Dropdown, TextInput } from "@/components/input";
-import Navbar from "../components/navigation/Navbar";
 import Questionnaire from "../components/questionnaire/Questionnaire";
 
 export default function Home() {
   return (
     <div className="lg:px-12">
-      <Navbar />
       <main className="mb-16">
         <section className="grid lg:grid-cols-7 gap-14">
           <div className="flex flex-col lg:col-span-3 bg-[#384B42] p-12 rounded-2xl">
@@ -101,13 +99,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <footer className="flex justify-between">
-        <div className="flex flex-col gap-2 font-medium capitalize tracking-wider">
-          <div className="  ">PRIVACY & LEGAL</div>
-          <div className="">CONTACT</div>
-        </div>
-        <div>© 2023 - One Day, All rights reserved.</div>
-      </footer>
     </div>
   );
 }

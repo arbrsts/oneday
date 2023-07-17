@@ -6,7 +6,7 @@ const Navbar = () => {
     const router = useRouter();
 
     return (
-        <nav className="flex items-center justify-between py-8">
+        <nav className="lg:px-12 flex items-center justify-between py-8">
         <h1 className="text-3xl text-[#08251C] font-bold font-sans">one day</h1>
         <div className="hidden lg:flex ml-auto mr-14 gap-12">
           <span className="text-xl tracking-wide">Mindfulness Journal</span>
@@ -17,7 +17,7 @@ const Navbar = () => {
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
           <span className="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
         </div>
-        <button onClick={() => router.push('/login')} className="flex items-center py-2 h-11 tracking-wide font-serif font-bold text-xl rounded px-10 text-white bg-[#00A870]" >
+        <button onClick={() => router.push('/auth/login')} className="flex items-center py-2 h-11 tracking-wide font-serif font-bold text-xl rounded px-10 text-white bg-[#00A870]" >
           Login
         </button>
       </nav>

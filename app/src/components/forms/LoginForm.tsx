@@ -65,8 +65,8 @@ const LoginForm = () => {
                 </Form>)}
             </Formik>
             <div className='flex justify-center'>
-                <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal'>Don't have an account?</p> 
-                <Link className='text-[#6CA390]' href='/signup'>Sign up here</Link>
+                <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal' >Don't have an account?</p> 
+                <Link className='text-[#6CA390]' href='/auth/signup'>Sign up here</Link>
             </div>
         </div>
     )

@@ -94,7 +94,7 @@ const SignupForm = () => {
             </Formik>
             <div className='flex justify-center'>
                 <p className='mr-1 text-gray-600 text-base font-sans font-normal leading-normal'>Already have an account?</p> 
-                <Link className='text-[#6CA390]' href='/login'>Login here</Link>
+                <Link className='text-[#6CA390]' href='/auth/login'>Login here</Link>
             </div>
         </div>
     )
