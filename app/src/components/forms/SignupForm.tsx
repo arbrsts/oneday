@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import Auth from '@/util/Auth';
+import FormField from './FormField';
 interface Values {
     username: string;
     password: string;
@@ -71,17 +72,29 @@ const SignupForm = () => {
                 onSubmit={handleSubmit}
             >{({ errors, touched }) => 
                 (<Form className='flex flex-col justify-center'>
-                    <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
-                    {errors.username && touched.username ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.username}</div> : null}
-                    <Field type='text' id='username' name='username' className={'rounded border mb-5 ' + (errors.username && touched.username ? 'border-red-500' : 'border-gray-600')} />
+                    <FormField
+                        type="text"
+                        id="username"
+                        name="username"
+                        label="Username"
+                        error={errors.username && touched.username ? errors.username : undefined}
+                    />
 
-                    <label htmlFor="password" className='text-gray-600 text-base font-sans font-normal leading-normal'>Password</label>
-                    {errors.password && touched.password ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.password}</div> : null}
-                    <Field type='password' id='password' name='password' className={'rounded border mb-5 ' + (errors.password && touched.password ? 'border-red-500' : 'border-gray-600')} />
+                    <FormField
+                        type="password"
+                        id="password"
+                        name="password"
+                        label="Password"
+                        error={errors.password && touched.password ? errors.password : undefined}
+                    />
 
-                    <label htmlFor="passwordConfirm" className='text-base font-sans font-normal leading-normal text-gray-600'>Confirm password</label>
-                    {errors.passwordConfirm && touched.passwordConfirm ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.passwordConfirm}</div> : null}
-                    <Field type='password' id='passwordConfirm' name='passwordConfirm' className={'rounded border mb-5 ' + (errors.passwordConfirm && touched.passwordConfirm ? 'border-red-500' : 'border-gray-600')} />
+                    <FormField
+                        type="password"
+                        id="passwordConfirm"
+                        name="passwordConfirm"
+                        label="Confirm password"
+                        error={errors.passwordConfirm && touched.passwordConfirm ? errors.passwordConfirm : undefined}
+                    />
 
                     {errors.accept && touched.accept ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.accept}</div> : null}
                     <label className="flex items-center text-gray-600 text-base font-sans font-normal leading-normal mb-7 ">

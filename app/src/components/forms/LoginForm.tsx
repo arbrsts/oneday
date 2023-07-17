@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import Auth from '@/util/Auth';
+import FormField from './FormField';
 
 interface Values {
     username: string;
@@ -53,13 +54,21 @@ const LoginForm = () => {
                 onSubmit={handleSubmit}
             >{({ errors, touched }) => 
                 (<Form className='flex flex-col justify-center'>
-                    <label  htmlFor="username" className='text-gray-600 text-base font-sans font-normal leading-normal'>Username</label>
-                    {errors.username && touched.username ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.username}</div> : null}
-                    <Field type='text' id='username' name='username' className={'rounded border mb-5 ' + (errors.username && touched.username ? 'border-red-500' : 'border-gray-600')} />
+                    <FormField
+                        type="text"
+                        id="username"
+                        name="username"
+                        label="Username"
+                        error={errors.username && touched.username ? errors.username : undefined}
+                    />
 
-                    <label htmlFor="password" className='text-gray-600 text-base font-sans font-normal leading-normal'>Password</label>
-                    {errors.password && touched.password ? <div className='text-sm font-sans font-normal leading-normal text-red-500' >{errors.password}</div> : null}
-                    <Field type='password' id='password' name='password' className={'rounded border mb-5 ' + (errors.password && touched.password ? 'border-red-500' : 'border-gray-600')} />
+                    <FormField
+                        type="password"
+                        id="password"
+                        name="password"
+                        label="Password"
+                        error={errors.password && touched.password ? errors.password : undefined}
+                    />
 
                     <button type='submit' className='text-xl bg-[#00A870] py-4 px-8 text-white font-serif font-bold rounded mb-5' >Login</button>
                 </Form>)}
