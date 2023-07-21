@@ -21,21 +21,17 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install and test
+      - name: npm install, build, and test
         run: |
-          cd ./app
-          npm ci 
-          npm run lint
-          rm -rf node_modules
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./app/* -r
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: release.zip
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,22 +46,11 @@ jobs:
         with:
           name: node-app
 
-      - name: unzip artifact for deployment
-        run: | 
-          unzip release.zip
-          rm release.zip
-
-      - name: npm install, build
-        run: |
-          cd ./app
-          npm ci 
-          npm run build
-
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'oneday-journal-dev'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B811567490E043C2ACA07E6CA4348E3F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F949E11E8F1485084106556B6E4BBC2 }}
           package: .
