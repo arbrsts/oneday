@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`flex flex-col min-h-screen px-4 pb-8 container mx-auto justify-center ${inter.variable} ${roboto.variable}`}
+        className={`flex flex-col min-h-screen  pb-8 lg:px-12 container mx-auto  ${inter.variable} ${roboto.variable}`}
       >
         <Navbar />
         {children}
-        <footer className="lg:px-12 flex justify-between">
+        <footer className="mt-20 flex justify-between">
             <div className="flex flex-col gap-2 font-medium capitalize tracking-wider">
                 <div className="  ">PRIVACY & LEGAL</div>
                 <div className="">CONTACT</div>
