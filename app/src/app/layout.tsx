@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Roboto, Alegreya } from "next/font/google";
-import Navbar from "@/components/navigation/Navbar";
 
 const inter = Alegreya({ subsets: ["latin"], variable: "--font-alegreya" });
 const roboto = Roboto({
@@ -20,20 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`flex flex-col min-h-screen  pb-8 lg:px-12 container mx-auto  ${inter.variable} ${roboto.variable}`}
-      >
-        <Navbar />
-        {children}
-        <footer className="mt-20 flex justify-between">
-            <div className="flex flex-col gap-2 font-medium capitalize tracking-wider">
-                <div className="  ">PRIVACY & LEGAL</div>
-                <div className="">CONTACT</div>
-            </div>
-            <div>© 2023 - One Day, All rights reserved.</div>
-        </footer>
-      </body>
+    <html lang="en" className={`${inter.variable} ${roboto.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
